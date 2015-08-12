@@ -1,0 +1,35 @@
+{
+    "name": "yt-app-gulp",
+    "version": "0.1.0",
+    "description": "Gulpified version of youtube-api-app",
+    "authors": [
+        "Berzoy Denys",
+        "Lyba Kristina",
+        "Ovsiannikov Alexander"
+  ],
+    "license": "MIT",
+    "homepage": "https://github.com/curlydevil/yt-app-gulp",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/curlydevil/yt-app-gulp.git"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-filter": "^3.0.0",
+        "gulp-if": "^1.2.5",
+        "gulp-inject": "^1.5.0",
+        "gulp-load-plugins": "^0.10.0",
+        "gulp-ng-annotate": "^1.1.0",
+        "gulp-plumber": "^1.0.1",
+        "gulp-print": "^1.1.0",
+        "gulp-rev": "^5.1.0",
+        "gulp-rev-replace": "^0.4.2",
+        "gulp-task-listing": "^1.0.1",
+        "gulp-uglify": "^1.2.0",
+        "gulp-useref": "^1.2.0",
+        "gulp-util": "^3.0.6",
+        "wiredep": "^2.2.2"
+    }
+}
