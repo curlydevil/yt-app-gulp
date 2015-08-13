@@ -21,7 +21,7 @@ gulp.task('minify', ['templatecache', 'copy-fonts'], minifyTask);
 
 gulp.task('process', ['minify'], buildCleanUpTask);
 
-gulp.task('azure-file-copy', ['process'], azureFileCopyTask);
+gulp.task('azure-file-copy', ['minify'], azureFileCopyTask);
 
 gulp.task('azure', ['azure-file-copy'], azureTask);
 
@@ -40,8 +40,17 @@ var tempFiles = [
     ];
 
 function azureTask(done) {
-    log('Cleaning up the build folder');
-    clean(config.build, done);
+    log('Cleaning up unnecessary files');
+
+    var files = [
+        config.build,
+        config.tmp,
+        config.root + 'README.md',
+        config.root + 'vendor/',
+        config.root + 'src/'
+    ];
+
+    clean(files, done);
 }
 
 function azureCleanupTask(done) {
