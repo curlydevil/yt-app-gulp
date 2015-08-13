@@ -128,7 +128,7 @@ function minifyTask() {
         .pipe($.csso())
         .pipe(cssFilter.restore)
         .pipe(jsFilter)
-        .pipe($.uglify())
+        //.pipe($.uglify())
         .pipe(jsFilter.restore)
         .pipe($.rev())
         .pipe(assets.restore())
@@ -152,7 +152,7 @@ function cleanTask(done) {
     clean(files, done);
 }
 
-function getSourceTask(done) {
+function getSourceTask() {
     log('Copying source to build folder');
 
     return gulp
