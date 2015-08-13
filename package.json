@@ -13,7 +13,9 @@
         "type": "git",
         "url": "https://github.com/curlydevil/yt-app-gulp.git"
     },
-    "scripts": {},
+    "scripts": {
+        "init": "npm install"
+    },
     "dependencies": {},
     "devDependencies": {
         "del": "^1.2.0",
