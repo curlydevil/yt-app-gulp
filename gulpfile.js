@@ -11,15 +11,59 @@ gulp.task('default', ['help']);
 
 gulp.task('clean', cleanTask);
 
-gulp.task('copyFonts', ['getSource'], copyFontsTask);
+gulp.task('copy-fonts', ['get-source'], copyFontsTask);
 
-gulp.task('getSource', ['clean'], getSourceTask);
+gulp.task('get-source', ['clean'], getSourceTask);
 
-gulp.task('templatecache', ['getSource'], templateCacheTask);
+gulp.task('templatecache', ['get-source'], templateCacheTask);
 
-gulp.task('minify', ['templatecache', 'copyFonts'], minifyTask);
+gulp.task('minify', ['templatecache', 'copy-fonts'], minifyTask);
 
-///
+gulp.task('process', ['minify'], buildCleanUpTask);
+
+gulp.task('azure-file-copy', ['process'], azureFileCopyTask);
+
+gulp.task('azure', ['azure-file-copy'], azureTask);
+
+gulp.task('azure-cleanup', azureCleanupTask);
+
+///////////////
+
+var tempFiles = [
+        config.tmp,
+        config.root + 'index.html',
+        config.root + 'favicon.ico',
+        config.root + 'web.config',
+        config.root + 'README.md',
+        config.root + 'vendor/',
+        config.root + 'src/'
+    ];
+
+function azureTask(done) {
+    clean(config.build, done);
+}
+
+function azureCleanupTask(done) {
+    var files = [
+        config.root + 'fonts',
+        config.root + 'js',
+        config.root + 'styles',
+        config.root + 'index.html'
+    ];
+
+    clean(files, done);
+}
+
+function azureFileCopyTask(done) {
+    return gulp
+        .src(config.build + '**/*.*')
+        .pipe(gulp.dest(config.root));
+}
+
+function buildCleanUpTask(done) {
+    log('cleaning all temp files');
+    clean(tempFiles, done);
+}
 
 function copyFontsTask() {
     log('Copying fonts');

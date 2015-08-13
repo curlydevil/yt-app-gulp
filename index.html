@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube API training app</title>
+
+    <link rel="stylesheet" href="styles/app-852d0b1e7d.css">
+
+</head>
+
+<body ng-app="ytApp" class="ng-cloak">
+    <nav class="navbar navbar-inverse" ng-controller='AuthenticationController as vm'>
+        <div class="container">
+            <a ui-sref="welcome" class="navbar-brand">YouTube API App</a>
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" ng-click="vm.isCollapsed = !vm.isCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse" collapse='vm.isCollapsed' ng-if="vm.isLoggedIn">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{ active: vm.isActive('home.player') }"><a ui-sref="home.player">Player</a></li>
+                    <li ng-class="{ active: vm.isActive('home.search') }"><a ui-sref="home.search">Search</a></li>
+                    <li ng-class="{ active: vm.isActive('home.edit') }"><a ui-sref="home.edit">Playlists</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a>{{vm.userInfo.fullName}} <img class="user-minipic"
+                                                                               ng-if="vm.userInfo.picture"
+                                                                               ng-src="{{vm.userInfo.picture}}">
+                        <i class="glyphicon glyphicon-user" ng-if="!vm.userInfo.picture"></i>
+                    </a>
+                    </li>
+                    <li><a ng-click="vm.logOut()" class="clickable"><i class="glyphicon glyphicon-off"></i></a></li>
+                </ul>
+            </div>
+            <div class="navbar-collapse clickable" collapse='vm.isCollapsed' ng-if="!vm.isLoggedIn">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="vm.logIn()">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div ui-view></div>
+    </div>
+
+    <script src="js/app-357e5a5207.js"></script>
+
+</body>
+
+</html>
