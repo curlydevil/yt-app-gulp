@@ -128,7 +128,7 @@ function minifyTask() {
         .pipe($.csso())
         .pipe(cssFilter.restore)
         .pipe(jsFilter)
-        .pipe($.uglify())
+        //.pipe($.uglify())
         .pipe(jsFilter.restore)
         .pipe($.rev())
         .pipe(assets.restore())
