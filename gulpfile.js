@@ -9,9 +9,7 @@ gulp.task('help', $.taskListing);
 
 gulp.task('default', ['help']);
 
-gulp.task('cleanAll', ['azureCleanUp'], cleanAllTask);
-
-gulp.task('azureCleanUp', azureCleanUpTask);
+gulp.task('cleanAll', cleanAllTask);
 
 gulp.task('copyFonts', ['getSource'], copyFontsTask);
 
@@ -21,9 +19,7 @@ gulp.task('templatecache', ['getSource'], templateCacheTask);
 
 gulp.task('minify', ['templatecache', 'copyFonts'], minifyTask);
 
-gulp.task('process', ['minify'], buildCleanUpTask);
-
-gulp.task('azure', ['process'], azureTask);
+gulp.task('process', ['minify'], cleanTempTask);
 ///
 
 var tempFiles = [
@@ -35,23 +31,6 @@ var tempFiles = [
         config.root + 'vendor/',
         config.root + 'src/'
     ];
-
-function azureTask(done) {
-    return gulp
-        .src(config.build + '**/*.*')
-        .pipe(gulp.dest(config.root));
-}
-
-function azureCleanUpTask(done) {
-    var files = [
-        config.root + 'fonts',
-        config.root + 'js',
-        config.root + 'styles',
-        config.root + 'index.html'
-    ];
-
-    clean(files, done);
-}
 
 function copyFontsTask() {
     log('Copying fonts');
@@ -117,7 +96,7 @@ function cleanAllTask(done) {
     clean(tempFiles.concat(config.build), done);
 }
 
-function buildCleanUpTask(done) {
+function cleanTempTask(done) {
     log('cleaning all temp files');
     clean(tempFiles, done);
 }
