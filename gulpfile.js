@@ -1,3 +1,4 @@
+var args = require('yargs').argv;
 var config = require('./gulp.config')();
 var del = require('del');
 var gulp = require('gulp');
@@ -14,6 +15,8 @@ gulp.task('clean', ['azure-cleanup'], cleanTask);
 gulp.task('copy-fonts', ['get-source'], copyFontsTask);
 
 gulp.task('get-source', ['clean'], getSourceTask);
+
+gulp.task('lint', ['get-source'], lintTask);
 
 gulp.task('templatecache', ['get-source'], templateCacheTask);
 
@@ -38,6 +41,20 @@ var tempFiles = [
         config.root + 'vendor/',
         config.root + 'src/'
     ];
+
+function lintTask() {
+    log('Analyzing source with JSHint and JSCS');
+
+    return gulp
+        .src(config.alljs)
+        .pipe($.if(args.verbose, $.print()))
+        .pipe($.jscs())
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('jshint-stylish', {
+            verbose: true
+        }))
+        .pipe($.jshint.reporter('fail'));
+}
 
 function azureTask(done) {
     log('Cleaning up unnecessary files');

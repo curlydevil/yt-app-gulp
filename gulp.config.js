@@ -8,6 +8,7 @@
         var index = root + 'index.html';
 
         var config = {
+            alljs: clientApp + '**/*.js',
             htmltemplates: clientApp + '**/*.html',
             fonts: root + 'vendor/bootstrap/fonts/**/*.*',
             origin: '../youtube-api-app/**/*.*',
