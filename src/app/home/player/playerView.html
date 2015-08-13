@@ -1,0 +1,27 @@
+<div class="player-container">
+    <div ng-if="vm.playlistService.selectedPlaylistitem() !== null">
+        <div class="video-container">
+            <div>
+                <iframe ng-src="{{vm.playlistService.selectedPlaylistitem().src}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="player-info">
+            <div class="player-info-header">
+                <div class="player-video-title" ng-if="vm.playlistService.selectedPlaylistitem() !== null">
+                    {{vm.playlistService.selectedPlaylistitem().snippet.title}}
+                </div>
+            </div>
+            <div class="player-add-btn" ng-hide="vm.playlistService.selectedPlaylistitem() === null || vm.checkIsVideoInCurrentPlaylist()">
+                <button class="btn btn-primary" ng-click="vm.addToPlaylist()">
+                    Add to current playlist <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="player-rmv-btn" ng-show="vm.playlistService.selectedPlaylistitem() !== null && vm.checkIsVideoInCurrentPlaylist()">
+                <button class="btn btn-danger" ng-click="vm.removeFromPlaylist()">
+                    Remove from current playlist <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div ng-if="vm.playlistService.selectedPlaylistitem() === null" class="no-video-available">No video selected</div>
+</div>

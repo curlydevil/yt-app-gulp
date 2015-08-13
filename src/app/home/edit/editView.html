@@ -1,0 +1,99 @@
+<div class="">
+    <table class="table table-hover table-responsive">
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <div ng-if="vm.newPlaylist.addMode">
+                        <div>
+                            <label>Title: </label>
+                            <input type="text"
+                                   class="full-width"
+                                   ng-minlength="1"
+                                   ng-model="vm.newPlaylist.snippet.title"/>
+                        </div>
+                        <div>
+                            <label>Description: </label>
+                            <input type="text"
+                                   class="full-width"
+                                   ng-model="vm.newPlaylist.snippet.description"/>
+                        </div>
+                        <br/>
+                        <div>
+                            <button class="btn btn-warning pull-left" ng-click="vm.addNewPlaylistReject()">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                            <button class="btn btn-success pull-right" ng-click="vm.addNewPlaylistAccept()">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <button type="button"
+                                class="close-button"
+                                title="Add new playlist"
+                                ng-click="vm.toggleAddPlaylist()">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat="playlist in vm.playlistService.playlists">
+                <td class="horizontal-center">
+                    <img ng-src="{{playlist.snippet.thumbnails['default'].url}}">
+                </td>
+                <td>
+                    <div class="">
+                        <label>Title: </label>
+                        <div ng-if="playlist.editMode">
+                            <input type="text" class="full-width" ng-minlength="1" ng-model="playlist.snippet.title"/>
+                        </div>
+                        <span ng-if="!playlist.editMode">
+                            {{playlist.snippet.title}}
+                        </span>
+                    </div>
+                    <div class="hidden-xs">
+                        <label>Description: </label>
+                        <div ng-if="playlist.editMode">
+                            <input type="text" class="full-width" ng-model="playlist.snippet.description"/>
+                        </div>
+                        <span ng-if="!playlist.editMode">
+                            {{playlist.snippet.description || 'none'}}
+                        </span>
+                    </div>
+                    <br/>
+                    <div ng-if="playlist.editMode">
+                        <div class="">
+                            <button class="btn btn-warning pull-left" ng-click="vm.playlistChangesReject(playlist)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                            <button class="btn btn-success pull-right" ng-click="vm.playlistChangesAccept(playlist)">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <button type="button"
+                                class="close-button"
+                                title="Remove playlist"
+                                ng-click="vm.removePlaylist(playlist)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <button type="button"
+                                class="close-button"
+                                title="Edit playlist"
+                                ng-click="vm.togglePlaylistEdit(playlist)">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
