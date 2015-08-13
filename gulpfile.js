@@ -9,7 +9,7 @@ gulp.task('help', $.taskListing);
 
 gulp.task('default', ['help']);
 
-gulp.task('clean', cleanTask);
+gulp.task('clean', ['azure-cleanup'], cleanTask);
 
 gulp.task('copy-fonts', ['get-source'], copyFontsTask);
 
@@ -40,10 +40,13 @@ var tempFiles = [
     ];
 
 function azureTask(done) {
+    log('Cleaning up the build folder');
     clean(config.build, done);
 }
 
 function azureCleanupTask(done) {
+    log('Cleaning up the Azure hosting files');
+
     var files = [
         config.root + 'fonts',
         config.root + 'js',
@@ -55,13 +58,15 @@ function azureCleanupTask(done) {
 }
 
 function azureFileCopyTask(done) {
+    log('Copying files from build folder to root for Azure hosting');
+
     return gulp
         .src(config.build + '**/*.*')
         .pipe(gulp.dest(config.root));
 }
 
 function buildCleanUpTask(done) {
-    log('cleaning all temp files');
+    log('Cleaning all temp files');
     clean(tempFiles, done);
 }
 
