@@ -8,14 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YouTube API training app</title>
 
-    <link rel="stylesheet" href="styles/app-852d0b1e7d.css">
     <style>
         .ng-cloak {
             display: none;
         }
 
     </style>
+    <script>
+        var cb = function() {
+            var l = document.createElement('link');
+            l.rel = 'stylesheet';
+            l.href = 'styles/app-852d0b1e7d.css';
+            var h = document.getElementsByTagName('head')[0];
+            h.parentNode.insertBefore(l, h);
+        };
+        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+            webkitRequestAnimationFrame || msRequestAnimationFrame;
+        if (raf) raf(cb);
+        else window.addEventListener('load', cb);
 
+    </script>
 </head>
 
 <body ng-app="ytApp">
