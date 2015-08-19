@@ -19,7 +19,7 @@
 </head>
 
 <body ng-app="ytApp">
-    <nav class="navbar navbar-inverse ng-cloak" ng-controller='AuthenticationController as vm'>
+    <nav class="navbar navbar-inverse" ng-controller='AuthenticationController as vm'>
         <div class="container">
             <a ui-sref="welcome" class="navbar-brand">YouTube API App</a>
 
@@ -37,7 +37,7 @@
                     <li ng-class="{ active: vm.isActive('home.search') }"><a ui-sref="home.search">Search</a></li>
                     <li ng-class="{ active: vm.isActive('home.edit') }"><a ui-sref="home.edit">Playlists</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right ng-cloak">
                     <li>
                         <a>{{vm.userInfo.fullName}} <img class="user-minipic"
                                                                                ng-if="vm.userInfo.picture"
